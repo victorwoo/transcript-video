@@ -1,6 +1,8 @@
 # Transcript Video Script
 
-A PowerShell script that automatically generates `.srt` subtitles in bulk for video files using `whisper-ctranslate2`.
+A [PowerShell](https://learn.microsoft.com/en-us/powershell/) script that automatically generates `.srt` subtitles in bulk for video files using `whisper-ctranslate2`.
+
+![Banner](./Images/Banner.png)
 
 ## Features
 
@@ -21,7 +23,7 @@ The video has been subtitled and is displayed correctly in the player:
 
 ## Prerequisites
 
-- Python environment must be installed on your system.
+- [Python](https://www.python.org/) environment must be installed on your system.
 - Install the `whisper-ctranslate2` Python package using the following command:
 
 ```powershell
@@ -75,4 +77,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Author
 
-- **[Victor Woo](https://github.com/victorwoo)**
+- [Victor Woo](https://github.com/victorwoo)
