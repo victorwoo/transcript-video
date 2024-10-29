@@ -3,7 +3,7 @@
 This script processes video files by transcribing them with `whisper-ctranslate2` and removes related subtitle files if they exist.
 
 .DESCRIPTION 
-This script takes a directory of video files (MP4, AVI, MKV) and checks if a subtitle file (.srt) with the same base name exists. 
+This script takes a directory of video files (MP4, AVI, MKV, MOV) and checks if a subtitle file (.srt) with the same base name exists. 
 If no subtitle is found, the script invokes `whisper-ctranslate2` to generate a transcript. 
 The script supports progress tracking, optional verbosity through the `-Verbose` parameter, and automatic language detection with the `-AutoDetectLanguage` parameter.
 
@@ -122,7 +122,7 @@ if (-not (Test-Path -Path $FolderPath)) {
 }
 
 # Retrieve all video files from the specified directory (including subdirectories)
-$videoFiles = Get-ChildItem -Path $FolderPath -Include *.mp4, *.avi, *.mkv -Recurse
+$videoFiles = Get-ChildItem -Path $FolderPath -Include *.mp4, *.avi, *.mkv, *.mov -Recurse
 
 # Check if any video files were found
 if ($videoFiles.Count -eq 0) {
