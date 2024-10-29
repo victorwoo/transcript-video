@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2024-10-29
+
+### Added
+
+- Add `RemoveSubtitles.ps1` script to remove existing subtitle files.
+
+### Fixed
+
+- Fixed the handling of complex paths.
+
 ## [1.1.0] - 2024-10-29
 
 ### Added
