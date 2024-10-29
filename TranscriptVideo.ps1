@@ -90,8 +90,7 @@ function Invoke-VideoTranscription {
             Write-Verbose "Executing command: $command $($arguments -join ' ')"
             # Run the command with verbose output
             & $command @arguments
-        }
-        else {
+        } else {
             Write-Verbose "Executing command: $command $($arguments -join ' ') *>`$null 2>`$null"
             # Run the command silently by redirecting output to $null
             & $command @arguments *>$null 2>$null
