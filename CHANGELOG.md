@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2024-10-29
+
+### Added
+
+- Enable automatic language detection by adding the `-AutoDetectLanguage` switch.
+- Add screenshots to the README.
+
 ## [1.0.1] - 2024-10-29
 
 ### Added

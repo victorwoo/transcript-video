@@ -1,38 +1,49 @@
-<#SYNOPSIS
+<# 
+SYNOPSIS 
 This script processes video files by transcribing them with `whisper-ctranslate2` and removes related subtitle files if they exist.
 
-DESCRIPTION
-This script takes a directory of video files (MP4, AVI, MKV) and checks if a subtitle file (.srt) with the same base name exists. If no subtitle is found, the script invokes `whisper-ctranslate2` to generate a transcript.  
-The script supports progress tracking and optional verbosity through the `-Verbose` parameter. It also handles cases where subtitle files with different extensions (.json, .tsv, .txt, .vtt) need to be removed.
+DESCRIPTION 
+This script takes a directory of video files (MP4, AVI, MKV) and checks if a subtitle file (.srt) with the same base name exists. If no subtitle is found, the script invokes `whisper-ctranslate2` to generate a transcript. 
+The script supports progress tracking, optional verbosity through the `-Verbose` parameter, and automatic language detection with the `-AutoDetectLanguage` parameter. 
 
-PARAMETER FolderPath
+PARAMETER FolderPath 
 (Optional) The path to the folder containing the video files. If not provided, the current directory will be used.
 
-NOTES
+PARAMETER AutoDetectLanguage 
+(Optional) Automatically detect the language of the video instead of using English by default.
+
+NOTES 
 Author: Victor.Woo  
 Date: 2024-10-29  
-Version: 1.0  
+Version: 1.1  
 
-PREREQUISITES
-- Python environment must be installed on your system.
-- Install the `whisper-ctranslate2` Python package using the following command:
-  pip install -U whisper-ctranslate2
+PREREQUISITES 
+- Python environment must be installed on your system. 
+- Install the `whisper-ctranslate2` Python package using the following command: 
+  pip install -U whisper-ctranslate2 
 - For more information, visit the official repository:  
-  https://github.com/Softcatala/whisper-ctranslate2
+  https://github.com/Softcatala/whisper-ctranslate2 
 
-EXAMPLE
-.\TranscriptVideo.ps1 -FolderPath "C:\Videos"
-Processes all video files in the specified directory.
+EXAMPLE 
+.\TranscriptVideo.ps1 -FolderPath "C:\Videos" 
+Processes all video files in the specified directory with default settings (English transcription). 
 
-EXAMPLE
-.\TranscriptVideo.ps1 -Verbose
-Runs the script with verbose output, showing `whisper-ctranslate2` execution details.
+EXAMPLE 
+.\TranscriptVideo.ps1 -FolderPath "C:\Videos" -AutoDetectLanguage 
+Processes all video files with automatic language detection.
+
+EXAMPLE 
+.\TranscriptVideo.ps1 -Verbose 
+Runs the script with verbose output, showing `whisper-ctranslate2` execution details. 
 #>
 
 # Define the script parameters
 param (
     [Parameter(Mandatory = $false)]
-    [string]$FolderPath  # Folder path containing video files
+    [string]$FolderPath,  # Folder path containing video files
+
+    [Parameter(Mandatory = $false)]
+    [switch]$AutoDetectLanguage  # Enable automatic language detection
 )
 
 # Function: Remove subtitle files with specific extensions
@@ -46,7 +57,7 @@ function Remove-SubtitleFiles {
 
     # Loop through each extension and remove the corresponding subtitle file if it exists
     foreach ($extension in $Extensions) {
-        $fileToDelete = $videoFile.BaseName + $extension
+        $fileToDelete = $VideoFile.BaseName + $extension
         if (Test-Path $fileToDelete) {
             Remove-Item $fileToDelete
         }
@@ -61,12 +72,19 @@ function Invoke-VideoTranscription {
     )
 
     try {
-        # If -Verbose is specified, display output from whisper-ctranslate2
+        # Construct the base command
+        $command = "whisper-ctranslate2 $VideoFilePath --model medium --device cpu"
+
+        # If AutoDetectLanguage is not enabled, add the default language parameter
+        if (-not $AutoDetectLanguage) {
+            $command += " --language en"
+        }
+
+        # Execute the command with or without verbose output
         if ($PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose")) {
-            whisper-ctranslate2 $VideoFilePath --model medium --language en --device cpu
+            Invoke-Expression $command
         } else {
-            # Otherwise, suppress all output (stdout and stderr)
-            whisper-ctranslate2 $VideoFilePath --model medium --language en --device cpu *>$null 2>&1
+            Invoke-Expression "$command *>$null 2>&1"
         }
     } catch {
         # Display a warning if the transcription fails
@@ -127,7 +145,7 @@ try {
 
         # If no .srt subtitle file exists, perform video transcription
         if (-not (Test-Path ("$($videoFile.BaseName).srt"))) {
-            Invoke-VideoTranscription -VideoFilePath $videoFile.FullName @PSBoundParameters
+            Invoke-VideoTranscription -VideoFilePath $videoFile.FullName
         }
     }
 } catch {
