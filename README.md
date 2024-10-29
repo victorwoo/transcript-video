@@ -13,7 +13,11 @@ A PowerShell script that processes video files by transcribing them with `whispe
 
 - Python environment must be installed on your system.
 - Install the `whisper-ctranslate2` Python package using the following command:
-  pip install -U whisper-ctranslate2
+
+```powershell
+pip install -U whisper-ctranslate2
+```
+
 - For more information, visit the official repository:  
   <https://github.com/Softcatala/whisper-ctranslate2>
 
@@ -22,17 +26,26 @@ A PowerShell script that processes video files by transcribing them with `whispe
 ### Basic Usage
 
 To process all video files in the current directory:
-  .\TranscriptVideo.ps1
+
+```powershell
+PS> .\TranscriptVideo.ps1
+```
 
 ### Process a Specific Folder
 
 To specify the folder containing video files:
-  .\TranscriptVideo.ps1 -FolderPath "C:\Videos"
+
+```powershell
+PS> .\TranscriptVideo.ps1 -FolderPath "C:\Videos"
+```
 
 ### Enable Verbose Mode
 
 To display detailed output:
-  .\TranscriptVideo.ps1 -Verbose
+
+```powershell
+PS> .\TranscriptVideo.ps1 -Verbose
+```
 
 ## Parameters
 
@@ -40,7 +53,9 @@ To display detailed output:
 
 ## Example
 
-  .\TranscriptVideo.ps1 -FolderPath "C:\Videos" -Verbose
+```powershell
+PS> .\TranscriptVideo.ps1 -FolderPath "C:\Videos" -Verbose
+```
 
 Processes all video files in C:\Videos with detailed output enabled.
 
@@ -50,4 +65,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Author
 
-- **Victor Woo**
+- **[Victor Woo](https://github.com/victorwoo)**
