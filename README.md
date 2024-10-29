@@ -9,6 +9,16 @@ A PowerShell script that processes video files by transcribing them with `whispe
 - **Progress Tracking:** Provides a progress bar to monitor the process.
 - **Verbose Mode:** Display detailed execution information when `-Verbose` is used.
 
+## Screen Shots
+
+Running the script:
+
+![running script](./Images/Screen%20shot%20-%20001.png)
+
+The video has been subtitled and is displayed correctly in the player:
+
+![subtitled video](./Images/Screen%20shot%20-%20002.png)
+
 ## Prerequisites
 
 - Python environment must be installed on your system.
