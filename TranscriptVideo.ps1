@@ -101,7 +101,7 @@ function Invoke-VideoTranscription {
     }
 }
 
-$VerbosePreference = "Continue"
+#$VerbosePreference = "Continue"
 
 # Determine the folder path to use; default to the current directory if not specified
 if (!$PSBoundParameters.ContainsKey('FolderPath') -and $Args.Count -eq 0) {
