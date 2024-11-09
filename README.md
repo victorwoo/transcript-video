@@ -6,10 +6,10 @@ A [PowerShell](https://learn.microsoft.com/en-us/powershell/) script that automa
 
 ## Features
 
-- **Video Transcription:** Supports .mp4, .avi, mkv, and .mov formats.
-- **Subtitle Management:** Removes existing subtitle files with .json, .tsv, .txt, or .vtt extensions.
-- **Progress Tracking:** Provides a progress bar to monitor the process.
-- **Verbose Mode:** Display detailed execution information when `-Verbose` is used.
+- **Video Transcription**: Supports .mp4, .avi, mkv, and .mov formats.
+- **Subtitle Management**: Removes existing subtitle files with .json, .tsv, .txt, or .vtt extensions.
+- **Progress Tracking**: Provides a progress bar to monitor the process.
+- **Verbose Mode**: Display detailed execution information when `-Verbose` is used.
 
 ## Screen Shots
 

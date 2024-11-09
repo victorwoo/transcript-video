@@ -121,8 +121,12 @@ if (-not (Test-Path -Path $FolderPath)) {
     exit 1
 }
 
+Write-Output "Processing video files in $FolderPath."
+
 # Retrieve all video files from the specified directory (including subdirectories)
 $videoFiles = Get-ChildItem -Path $FolderPath -Include *.mp4, *.avi, *.mkv, *.mov -Recurse
+
+Write-Output "Found $($videoFiles.Count) video files."
 
 # Check if any video files were found
 if ($videoFiles.Count -eq 0) {
@@ -146,7 +150,7 @@ try {
         # Update the progress bar
         $processedCount++
         $percentComplete = ($processedCount / $totalCount) * 100  # Calculate progress percentage
-        $status = "Processing $($videoFile.Name)"  # Status message for the progress bar
+        $status = "$processedCount/$totalCount - $($videoFile.Name)"  # Status message for the progress bar
         Write-Progress -Activity $activity -Status $status -PercentComplete $percentComplete
 
         # Remove existing subtitle files with the specified extensions
@@ -170,4 +174,5 @@ try {
 } finally {
     # Clear the progress bar after completion
     Write-Progress -Activity $activity -Completed
+    Pop-Location
 }
